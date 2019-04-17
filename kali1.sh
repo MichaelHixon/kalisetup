@@ -39,7 +39,7 @@ if [ 1 -eq 0 ]; then    # This is never true, thus it acts as block comments ;)
 wget -qO /tmp/kali.sh https://raw.github.com/g0tmi1k/os-scripts/master/kali.sh && bash /tmp/kali.sh --osx --dns --burp --openvas --hold
 ################################################################################
 ## Shorten URL: >>>   wget -qO- http://bit.do/postkali | bash   <<<
-##  Alt Method: curl -s -L -k https://raw.github.com/g0tmi1k/kali-postinstall/master/kali_postinstall.sh > kali.sh | nohup bash
+##  Alt Method: curl -s -L -k https://github.com/MichaelHixon/kalisetup/master/kali_postinstall.sh > kali.sh | nohup bash
 ################################################################################
 fi
 

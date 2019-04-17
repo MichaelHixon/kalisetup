@@ -1,14 +1,14 @@
 #!/bin/bash
 #-Metadata----------------------------------------------------#
-#  Filename: kali.sh                     (Update: 2015-12-02) #
+#  Filename: kali.sh                     (Update: 2019-04-17) #
 #-Info--------------------------------------------------------#
 #  Personal post-install script for Kali Linux 2.0.           #
 #-Author(s)---------------------------------------------------#
-#  g0tmilk ~ https://blog.g0tmi1k.com/                        #
+#  Michael Hixon                        #
 #-Operating System--------------------------------------------#
 #  Designed for: Kali Linux 2.x [x64] (VM - VMware)           #
 #     Tested on: Kali Linux 2.0.0 x64/x84/full/light/mini/vm  #
-#     Kali v1.x: https://g0tmi1k/os-scripts/master/kali1.sh   #
+#     Kali v1.x: https://github.com/MichaelHixon/kalisetup/master/kali1.sh   #
 #-Licence-----------------------------------------------------#
 #  MIT License ~ http://opensource.org/licenses/MIT           #
 #-Notes-------------------------------------------------------#
@@ -36,10 +36,11 @@
 
 if [ 1 -eq 0 ]; then    # This is never true, thus it acts as block comments ;)
 ### One liner - Grab the latest version and execute! ###########################
-wget -qO kali.sh https://raw.github.com/g0tmi1k/os-scripts/master/kali.sh && bash kali.sh -dns -burp -openvas -rolling -keyboard gb -timezone "Europe/London"
+wget -qO kali.sh https://github.com/MichaelHixon/kalisetup/master/kali.sh && bash kali.sh -openvas -rolling -osx -timezone "America/New_York"
+
 ################################################################################
 ## Shorten URL: >->->   wget -qO- http://bit.do/postkali | bash   <-<-<
-##  Alt Method: curl -s -L -k https://raw.github.com/g0tmi1k/kali-postinstall/master/kali_postinstall.sh > kali.sh | nohup bash
+##  Alt Method: curl -s -L -k https://github.com/MichaelHixon/kalisetup/master/kali_postinstall.sh > kali.sh | nohup bash
 ################################################################################
 fi
 
@@ -1977,33 +1978,33 @@ EOF
 
 
 ###### Install atom
-#echo -e "\n ${GREEN}[+]${RESET} Installing ${GREEN}atom${RESET} ~ text editor"
-#timeout 300 curl --progress -k -L -f "https://atom.io/download/deb" > /tmp/atom.deb || echo -e ' '${RED}'[!]'${RESET}" Issue downloading atom.deb" 1>&2   #***!!! hardcoded version! Need to manually check for updates
-#dpkg -i /tmp/atom.deb
-##--- Create config file
-#mkdir -p ~/.atom/
-#if [[ -f ~/.atom/config.cson ]]; then
-#  echo -e ' '${RED}'[!]'${RESET}" Atom config detected. Skipping..." 1>&2
-#else
-#  cat <<EOF > ~/.atom/config.cson
-#"*":
-#  welcome:
-#    showOnStartup: false
-#  core:
-#    disabledPackages: [
-#      "metrics"
-#    ]
-#EOF
-#fi
+echo -e "\n ${GREEN}[+]${RESET} Installing ${GREEN}atom${RESET} ~ text editor"
+timeout 300 curl --progress -k -L -f "https://atom.io/download/deb" > /tmp/atom.deb || echo -e ' '${RED}'[!]'${RESET}" Issue downloading atom.deb" 1>&2   #***!!! hardcoded version! Need to manually check for updates
+dpkg -i /tmp/atom.deb
+#--- Create config file
+mkdir -p ~/.atom/
+if [[ -f ~/.atom/config.cson ]]; then
+  echo -e ' '${RED}'[!]'${RESET}" Atom config detected. Skipping..." 1>&2
+else
+  cat <<EOF > ~/.atom/config.cson
+"*":
+  welcome:
+    showOnStartup: false
+  core:
+    disabledPackages: [
+      "metrics"
+    ]
+EOF
+fi
 
 
 ##### Install PyCharm (Community Edition)
-echo -e "\n ${GREEN}[+]${RESET} Installing ${GREEN}PyCharm (Community Edition)${RESET} ~ Python IDE"
-timeout 300 curl --progress -k -L -f "https://download.jetbrains.com/python/pycharm-community-5.0.tar.gz" > /tmp/pycharms-community.tar.gz || echo -e ' '${RED}'[!]'${RESET}" Issue downloading pycharms-community.tar.gz" 1>&2       #***!!! hardcoded version!
-tar -xf /tmp/pycharms-community.tar.gz -C /tmp/
-rm -rf /usr/share/pycharms/
-mv -f /tmp/pycharm-community-*/ /usr/share/pycharms
-ln -sf /usr/share/pycharms/bin/pycharm.sh /usr/local/bin/pycharms
+#echo -e "\n ${GREEN}[+]${RESET} Installing ${GREEN}PyCharm (Community Edition)${RESET} ~ Python IDE"
+#timeout 300 curl --progress -k -L -f "https://download.jetbrains.com/python/pycharm-community-5.0.tar.gz" > /tmp/pycharms-community.tar.gz || echo -e ' '${RED}'[!]'${RESET}" Issue downloading pycharms-community.tar.gz" 1>&2       #***!!! hardcoded version!
+#tar -xf /tmp/pycharms-community.tar.gz -C /tmp/
+#rm -rf /usr/share/pycharms/
+#mv -f /tmp/pycharm-community-*/ /usr/share/pycharms
+#ln -sf /usr/share/pycharms/bin/pycharm.sh /usr/local/bin/pycharms
 
 
 ##### Install wdiff
